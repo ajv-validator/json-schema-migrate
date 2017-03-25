@@ -43,9 +43,15 @@ console.log(schema);
 ```
 
 
-## Changes in schemas
+## Changes in schemas after migration
 
-TODO
+- `id` is replaced with `$id`
+- `$schema` value becomes draft-06 meta-schema (or draft-06 hyper-schema)
+- boolean form of `exclusiveMaximum/Minimum` is replaced with numeric form
+- `enum` with a single allowed value is replaced with `const`
+- Ajv v5 `constant` is replaced with `const`
+- empty schema is replaced with `true`
+- schema `{"not":{}}` is replaced with `false`
 
 
 ## Options
