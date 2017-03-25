@@ -2,9 +2,12 @@
   "name": "json-schema-migrate",
   "version": "0.0.1",
   "description": "Migrate JSON-Schema to draft-06",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "eslint lib spec",
+    "test-spec": "mocha spec/*.spec.js -R spec",
+    "test-debug": "mocha spec/*.spec.js --debug-brk -R spec",
+    "test": "nyc npm run test-spec"
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,24 @@
   "bugs": {
     "url": "https://github.com/epoberezkin/json-schema-migrate/issues"
   },
-  "homepage": "https://github.com/epoberezkin/json-schema-migrate#readme"
+  "homepage": "https://github.com/epoberezkin/json-schema-migrate#readme",
+  "dependencies": {
+    "ajv": "^5.0.4-beta.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
+    "pre-commit": "^1.2.2"
+  },
+  "nyc": {
+    "exclude": [
+      "**/spec/**",
+      "node_modules"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
+  }
 }
