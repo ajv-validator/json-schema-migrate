@@ -28,7 +28,7 @@ const schema = {
   exclusiveMinimum: true,
 }
 const {valid, errors} = migrate.draft7(schema)
-// migrate.draft2019(schema)
+// or migrate.draft2019(schema)
 
 console.log(schema)
 // {
