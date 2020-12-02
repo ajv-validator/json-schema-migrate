@@ -10,7 +10,7 @@
     "prettier:check": "prettier --list-different \"./**/*.{md,json,yaml,js,ts}\"",
     "test-spec": "jest \"spec/*.ts\"",
     "test-cov": "jest \"spec/*.ts\" --coverage",
-    "test": "npm run build && npm run eslint && npm run test-spec"
+    "test": "npm run build && npm run eslint && npm run test-cov"
   },
   "repository": {
     "type": "git",
