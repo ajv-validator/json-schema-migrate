@@ -1,6 +1,6 @@
 {
   "name": "json-schema-migrate",
-  "version": "0.2.0",
+  "version": "1.0.0-beta.0",
   "description": "Migrate JSON-Schema to draft-06",
   "main": "dist/index.js",
   "scripts": {
