@@ -4,7 +4,7 @@ Migrate JSON-Schema from draft-04 to draft-07 and draft-2019-09
 
 [![build](https://github.com/ajv-validator/json-schema-migrate/workflows/build/badge.svg)](https://github.com/ajv-validator/json-schema-migrate/actions?query=workflow%3Abuild)
 [![npm](https://img.shields.io/npm/v/json-schema-migrate)](https://www.npmjs.com/package/json-schema-migrate)
-[![Coverage Status](https://coveralls.io/repos/github/epoberezkin/json-schema-migrate/badge.svg?branch=master)](https://coveralls.io/github/epoberezkin/json-schema-migrate?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/ajv-validator/json-schema-migrate/badge.svg?branch=master)](https://coveralls.io/github/ajv-validator/json-schema-migrate?branch=master)
 
 ## Install
 
