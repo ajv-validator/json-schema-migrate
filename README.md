@@ -37,6 +37,12 @@ console.log(schema)
 // }
 ```
 
+You can access Ajv instance that was used to migrate schema using `migrate.getAjv` function:
+
+```javascript
+console.log(migrate.getAjv().errorsText(errors))
+```
+
 ## Changes in schemas after migration
 
 - `id` is replaced with `$id`

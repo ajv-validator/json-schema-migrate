@@ -1,9 +1,9 @@
 import assert = require("assert")
-import {draft7, draft2019} from ".."
+import {draft7, draft2019, getAjv} from ".."
 import schemaDraft4 = require("./fixtures/schema-draft-04.json")
 import expectedSchemaDraft7 = require("./fixtures/expected-schema-from-draft-04-to-07.json")
 import expectedSchemaDraft2019 = require("./fixtures/expected-schema-from-draft-04-to-2019.json")
-import {AnySchemaObject} from "ajv"
+import Ajv, {AnySchemaObject} from "ajv/dist/core"
 
 function clone(schema: AnySchemaObject): AnySchemaObject {
   return JSON.parse(JSON.stringify(schema)) as AnySchemaObject
@@ -14,6 +14,7 @@ describe("migrate to draft-07 schema", () => {
     const schema = clone(schemaDraft4)
     draft7(schema)
     assert.deepStrictEqual(schema, expectedSchemaDraft7)
+    assert(getAjv() instanceof Ajv)
   })
 
   it("should migrate from draft-04 schema to draft-2019-09 schema", () => {

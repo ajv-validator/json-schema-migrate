@@ -15,14 +15,13 @@ function getMigrateSchema(version: SchemaVersion): SchemaObject {
   }
 }
 
-let ajv: Ajv
+let ajv: Ajv | undefined
 
 function getMigrate(version: SchemaVersion): (schema: AnySchemaObject) => AnySchemaObject {
   let migrate: ValidateFunction | undefined
 
   return (schema) => {
-    ajv ||= getAjv()
-    migrate ||= ajv.compile(getMigrateSchema(version))
+    migrate ||= getAjv().compile(getMigrateSchema(version))
     const valid = migrate(schema)
     schema.$schema ||= metaSchema(version)
     return {valid, errors: migrate.errors}
@@ -35,10 +34,11 @@ function metaSchema(version: SchemaVersion): string {
     : "https://json-schema.org/draft/2019-09/schema"
 }
 
-function getAjv(): Ajv {
-  ajv = new Ajv({allErrors: true})
+export function getAjv(): Ajv {
+  if (ajv) return ajv
+  const _ajv = new Ajv({allErrors: true})
 
-  ajv.addKeyword({
+  _ajv.addKeyword({
     keyword: "migrateSchema",
     schemaType: "string",
     modifying: true,
@@ -141,12 +141,12 @@ function getAjv(): Ajv {
         if (dsCopy[key] === true) {
           schema[key] = dsCopy[limit]
         } else if (dsCopy[key] !== false && dsCopy[key] !== undefined) {
-          ajv.logger.warn(`${key} is not boolean`)
+          _ajv.logger.warn(`${key} is not boolean`)
         }
       }
     },
   })
-  return ajv
+  return _ajv
 }
 
 function constantResultSchema(schema: AnySchema): boolean | undefined {
