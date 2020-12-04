@@ -2,12 +2,15 @@
   "name": "json-schema-migrate",
   "version": "0.2.0",
   "description": "Migrate JSON-Schema to draft-06",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "eslint": "eslint lib spec",
-    "test-spec": "mocha spec/*.spec.js -R spec",
-    "test-debug": "mocha spec/*.spec.js --debug-brk -R spec",
-    "test": "nyc npm run test-spec"
+    "build": "rm -rf dist && tsc",
+    "eslint": "eslint src spec",
+    "prettier:write": "prettier --write \"./**/*.{md,json,yaml,js,ts}\"",
+    "prettier:check": "prettier --list-different \"./**/*.{md,json,yaml,js,ts}\"",
+    "test-spec": "jest \"spec/*.ts\"",
+    "test-cov": "jest \"spec/*.ts\" --coverage",
+    "test": "npm run build && npm run eslint && npm run test-cov"
   },
   "repository": {
     "type": "git",
@@ -25,23 +28,31 @@
   },
   "homepage": "https://github.com/epoberezkin/json-schema-migrate#readme",
   "dependencies": {
-    "ajv": "^5.0.0"
+    "ajv": "^7.0.0-beta.9"
   },
   "devDependencies": {
-    "coveralls": "^2.12.0",
-    "eslint": "^3.18.0",
-    "mocha": "^3.2.0",
-    "nyc": "^10.1.2",
-    "pre-commit": "^1.2.2"
+    "@ajv-validator/config": "^0.3.0",
+    "@types/jest": "^26.0.16",
+    "@types/node": "^14.11.10",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.13.0",
+    "glob": "^7.1.3",
+    "husky": "^4.3.0",
+    "jest": "^26.5.3",
+    "lint-staged": "^10.5.2",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.2"
   },
-  "nyc": {
-    "exclude": [
-      "**/spec/**",
-      "node_modules"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ]
+  "prettier": "@ajv-validator/config/prettierrc.json",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{md,json,yaml,js,ts}": "prettier --write"
   }
 }
