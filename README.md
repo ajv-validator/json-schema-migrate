@@ -1,18 +1,12 @@
 # json-schema-migrate
 
-Migrate JSON-Schema from draft-04 to draft-07 and draft-2019-09
+Migrate JSON-Schema from draft-04 to draft-07 or draft-2019-09
 
 [![build](https://github.com/ajv-validator/json-schema-migrate/workflows/build/badge.svg)](https://github.com/ajv-validator/json-schema-migrate/actions?query=workflow%3Abuild)
 [![npm](https://img.shields.io/npm/v/json-schema-migrate)](https://www.npmjs.com/package/json-schema-migrate)
-[![Coverage Status](https://coveralls.io/repos/github/ajv-validator/json-schema-migrate/badge.svg?branch=master)](https://coveralls.io/github/ajv-validator/json-schema-migrate?branch=master)
+[![coverage](https://coveralls.io/repos/github/ajv-validator/json-schema-migrate/badge.svg?branch=master)](https://coveralls.io/github/ajv-validator/json-schema-migrate?branch=master)
 
 ## Install
-
-```
-npm install json-schema-migrate@beta
-```
-
-or to install v0.2 (to migrate to draft-06)
 
 ```
 npm install json-schema-migrate
