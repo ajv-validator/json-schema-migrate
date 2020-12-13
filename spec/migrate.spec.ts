@@ -14,7 +14,9 @@ describe("migrate to draft-07 schema", () => {
     const schema = clone(schemaDraft4)
     draft7(schema)
     assert.deepStrictEqual(schema, expectedSchemaDraft7)
-    assert(getAjv() instanceof Ajv)
+    const ajv = getAjv()
+    assert(ajv instanceof Ajv)
+    assert.strictEqual(ajv, getAjv())
   })
 
   it("should migrate from draft-04 schema to draft-2019-09 schema", () => {

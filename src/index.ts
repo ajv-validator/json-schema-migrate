@@ -15,16 +15,13 @@ function getMigrateSchema(version: SchemaVersion): SchemaObject {
   }
 }
 
-let ajv: Ajv | undefined
-
-function getMigrate(version: SchemaVersion): (schema: AnySchemaObject) => AnySchemaObject {
+function getMigrate(version: SchemaVersion): (schema: AnySchemaObject) => void {
   let migrate: ValidateFunction | undefined
 
   return (schema) => {
     migrate ||= getAjv().compile(getMigrateSchema(version))
-    const valid = migrate(schema)
+    migrate(schema)
     schema.$schema ||= metaSchema(version)
-    return {valid, errors: migrate.errors}
   }
 }
 
@@ -34,9 +31,11 @@ function metaSchema(version: SchemaVersion): string {
     : "https://json-schema.org/draft/2019-09/schema"
 }
 
+let ajv: Ajv | undefined
+
 export function getAjv(): Ajv {
   if (ajv) return ajv
-  const _ajv = new Ajv({allErrors: true})
+  const _ajv = (ajv = new Ajv({allErrors: true}))
 
   _ajv.addKeyword({
     keyword: "migrateSchema",

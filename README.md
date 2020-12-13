@@ -27,7 +27,7 @@ const schema = {
   minimum: 1,
   exclusiveMinimum: true,
 }
-const {valid, errors} = migrate.draft7(schema)
+migrate.draft7(schema)
 // or migrate.draft2019(schema)
 
 console.log(schema)
@@ -37,7 +37,7 @@ console.log(schema)
 // }
 ```
 
-You can access Ajv instance that was used to migrate schema using `migrate.getAjv` function:
+You can access Ajv instance that is used to migrate schema using `migrate.getAjv` function:
 
 ```javascript
 console.log(migrate.getAjv().errorsText(errors))
@@ -47,7 +47,7 @@ console.log(migrate.getAjv().errorsText(errors))
 
 - `id` is replaced with `$id`
 - `$schema` value becomes draft-07 or draft-2019-09 meta-schema
-- boolean form of `exclusiveMaximum/Minimum` is replaced with numeric form
+- draft-04 boolean form of `exclusiveMaximum/Minimum` is replaced with the current number form
 - `enum` with a single allowed value is replaced with `const`
 - Non-standard `constant` is replaced with `const`
 - empty schema is replaced with `true`
