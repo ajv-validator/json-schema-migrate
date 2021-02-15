@@ -87,9 +87,6 @@ export function getAjv(): Ajv {
                 : $schema
             break
           }
-          case "definitions":
-            dataSchema[version === "draft7" ? "definitions" : "$defs"] = dsCopy.definitions
-            break
           case "constant":
             dataSchema.const = dsCopy.constant
             break
