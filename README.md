@@ -1,6 +1,6 @@
 # json-schema-migrate
 
-Migrate JSON-Schema from draft-04 to draft-07 or draft-2019-09
+Migrate JSON-Schema from draft-04 to draft-07, draft-2019-09 or draft-2020-12
 
 [![build](https://github.com/ajv-validator/json-schema-migrate/workflows/build/badge.svg)](https://github.com/ajv-validator/json-schema-migrate/actions?query=workflow%3Abuild)
 [![npm](https://img.shields.io/npm/v/json-schema-migrate)](https://www.npmjs.com/package/json-schema-migrate)
@@ -23,6 +23,7 @@ const schema = {
 }
 migrate.draft7(schema)
 // or migrate.draft2019(schema)
+// or migrate.draft2020(schema)
 
 console.log(schema)
 // {
@@ -40,7 +41,7 @@ console.log(migrate.getAjv().errorsText(errors))
 ## Changes in schemas after migration
 
 - `id` is replaced with `$id`
-- `$schema` value becomes draft-07 or draft-2019-09 meta-schema
+- `$schema` value becomes draft-07, draft-2019-09 or draft-2020-12 meta-schema
 - draft-04 boolean form of `exclusiveMaximum/Minimum` is replaced with the current number form
 - `enum` with a single allowed value is replaced with `const`
 - Non-standard `constant` is replaced with `const`
@@ -51,6 +52,7 @@ console.log(migrate.getAjv().errorsText(errors))
   - `dependencies` with `dependentRequired` and `dependentSchemas`
   - `"id": "#foo"` with `"$anchor": "foo"`
   - `"id": "schema#foo"` with `"$id": "schema", "$anchor": "foo"`
+- `draft2020` function additionally replaces array form of `items` with `prefixItems` (and `additionalItems` with `items`)
 
 ## License
 

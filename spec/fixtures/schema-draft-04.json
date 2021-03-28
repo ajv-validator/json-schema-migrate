@@ -30,7 +30,18 @@
     "alwaysValid": {},
     "alsoAlwaysValid": {"not": {"not": {}}},
     "alwaysInvalid": {"not": {}},
-    "alsoAlwaysInvalid": {"not": {"not": {"not": {}}}}
+    "alsoAlwaysInvalid": {"not": {"not": {"not": {}}}},
+    "array": {
+      "items": {"type": "number"}
+    },
+    "tuple": {
+      "items": [{"type": "number"}, {"type": "string"}],
+      "additionalItems": false
+    },
+    "tupleExtras": {
+      "items": [{"type": "number"}, {"type": "string"}],
+      "additionalItems": {"type": "boolean"}
+    }
   },
   "dependencies": {
     "foo": ["bar"],

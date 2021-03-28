@@ -32,12 +32,12 @@
       "items": {"type": "number"}
     },
     "tuple": {
-      "items": [{"type": "number"}, {"type": "string"}],
-      "additionalItems": false
+      "prefixItems": [{"type": "number"}, {"type": "string"}],
+      "items": false
     },
     "tupleExtras": {
-      "items": [{"type": "number"}, {"type": "string"}],
-      "additionalItems": {"type": "boolean"}
+      "prefixItems": [{"type": "number"}, {"type": "string"}],
+      "items": {"type": "boolean"}
     }
   },
   "dependentRequired": {

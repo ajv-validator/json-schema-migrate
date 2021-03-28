@@ -26,7 +26,18 @@
     "alwaysValid": true,
     "alsoAlwaysValid": true,
     "alwaysInvalid": false,
-    "alsoAlwaysInvalid": false
+    "alsoAlwaysInvalid": false,
+    "array": {
+      "items": {"type": "number"}
+    },
+    "tuple": {
+      "items": [{"type": "number"}, {"type": "string"}],
+      "additionalItems": false
+    },
+    "tupleExtras": {
+      "items": [{"type": "number"}, {"type": "string"}],
+      "additionalItems": {"type": "boolean"}
+    }
   },
   "dependencies": {
     "foo": ["bar"],

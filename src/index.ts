@@ -1,10 +1,11 @@
 import Ajv, {SchemaObject, AnySchemaObject, AnySchema} from "ajv/dist/2019"
 import type {DataValidationCxt, ValidateFunction} from "ajv/dist/types"
 
-type SchemaVersion = "draft7" | "draft2019"
+type SchemaVersion = "draft7" | "draft2019" | "draft2020"
 
 export const draft7 = getMigrate("draft7")
 export const draft2019 = getMigrate("draft2019")
+export const draft2020 = getMigrate("draft2020")
 
 function getMigrateSchema(version: SchemaVersion): SchemaObject {
   return {
@@ -41,7 +42,8 @@ export function getAjv(): Ajv {
     keyword: "migrateSchema",
     schemaType: "string",
     modifying: true,
-    metaSchema: {enum: ["draft7", "draft2019"]},
+    metaSchema: {enum: ["draft7", "draft2019", "draft2020"]},
+    // eslint-disable-next-line complexity
     validate(
       version: SchemaVersion,
       dataSchema: AnySchema,
@@ -66,7 +68,7 @@ export function getAjv(): Ajv {
             if (typeof id !== "string") {
               throw new Error(`json-schema-migrate: schema id must be string`)
             }
-            if (version === "draft2019" && id.includes("#")) {
+            if ((version === "draft2019" || version === "draft2020") && id.includes("#")) {
               const [$id, $anchor, ...rest] = id.split("#")
               if (rest.length > 0) {
                 throw new Error(`json-schema-migrate: invalid schema id ${id}`)
@@ -127,6 +129,21 @@ export function getAjv(): Ajv {
             }
             break
           }
+          case "items":
+            if (version === "draft2020" && Array.isArray(dsCopy.items)) {
+              dataSchema.prefixItems = dsCopy.items
+              if (dsCopy.additionalItems !== undefined) {
+                dataSchema.items = dsCopy.additionalItems
+              }
+            } else {
+              dataSchema.items = dsCopy.items
+            }
+            break
+          case "additionalItems":
+            if (version !== "draft2020") {
+              dataSchema.additionalItems = dsCopy.additionalItems
+            }
+            break
           default:
             dataSchema[key] = dsCopy[key]
         }

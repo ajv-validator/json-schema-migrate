@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/epoberezkin/json-schema-migrate#readme",
   "dependencies": {
-    "ajv": "^7.0.0-beta.9"
+    "ajv": "^8.0.0"
   },
   "devDependencies": {
     "@ajv-validator/config": "^0.3.0",
